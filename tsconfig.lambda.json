@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist/lambda",
+    "target": "es2022",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noEmit": false
+  },
+  "include": ["src/api/lambda/**/*"],
+  "exclude": ["node_modules"]
+}

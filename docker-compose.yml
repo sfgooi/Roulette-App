@@ -1,0 +1,30 @@
+services:
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    ports:
+      - "8000:8000"
+    command:
+      [
+        "-jar",
+        "DynamoDBLocal.jar",
+        "-sharedDb",
+        "-dbPath",
+        "/home/dynamodblocal/data",
+        "-cors",
+        "http://localhost:5173",
+      ]
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+  lambda-local:
+    image: public.ecr.aws/lambda/nodejs:20.2024.11.22.14
+    command: [ "index.handler" ]
+    restart: always
+    volumes:
+      - ./project_dir:/var/task
+    ports:
+      - "9000:8080"
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "10"
