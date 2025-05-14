@@ -10,7 +10,10 @@ import DepartmentTabs from "../molecules/DepartmentTabs";
 import { Member } from "../../api/dynamoDB/types";
 import CloseButton from "../atoms/CloseButton";
 import { DepartmentType } from "../../types/department";
-import { memberOperations } from "../../api/dynamoDB/operations/member";
+import {
+  saveMembers,
+  getAllMembers,
+} from "../../api/dynamoDB/operations/member";
 
 type Props = {
   members: Member[];
@@ -27,8 +30,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
   const [hasChanges, setHasChanges] = useState(false);
 
   const fetchMembers = useCallback(async () => {
-    const members = await memberOperations.getAllMembers();
-    console.log("members", members);
+    const members = await getAllMembers();
 
     setMembers(members);
     setOriginalMembers(members);
@@ -160,7 +162,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     originalMembers: Member[]
   ) => {
     try {
-      await memberOperations.saveMembers(updateMembers, originalMembers);
+      await saveMembers(updateMembers, originalMembers);
       fetchMembers();
       setOriginalMembers(members);
       setHasChanges(false);

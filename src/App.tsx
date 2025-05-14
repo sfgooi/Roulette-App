@@ -6,7 +6,7 @@ import SettingsModal from "./components/molecules/SettingsModal";
 import Roulette from "./components/organisms/Roulette";
 import { Member } from "./api/dynamoDB/types";
 import { useEffect } from "react";
-import { memberOperations } from "./api/dynamoDB/operations/member";
+import { getAllMembers } from "./api/dynamoDB/operations/member";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,7 +17,7 @@ function App() {
     const fetchMembers = async () => {
       try {
         setIsLoading(true);
-        const members = await memberOperations.getAllMembers();
+        const members = await getAllMembers();
         setMembers(members);
       } finally {
         setIsLoading(false);

@@ -4,7 +4,6 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
 const isDevelopment = import.meta.env.MODE === "development";
 
-console.log("isDevelopment", isDevelopment);
 const client = new DynamoDBClient(
   isDevelopment
     ? {

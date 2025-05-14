@@ -23,9 +23,7 @@ const createTable = async () => {
   });
 
   try {
-    console.log("テーブルの作成を開始します...");
     await dynamoDb.send(command);
-    console.log("テーブルの作成が完了しました！");
   } catch (error) {
     alert("エラーが発生しました:" + error);
     process.exit(1);

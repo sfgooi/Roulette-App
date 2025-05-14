@@ -1,5 +1,5 @@
 import { Member } from "../src/api/dynamoDB/types";
-import { memberOperations } from "../src/api/dynamoDB/operations/member";
+import { createMember } from "../src/api/dynamoDB/operations/member";
 
 // DynamoDBのダミーデータ作成スクリプト
 const seedData: Omit<Member, "createdAt" | "updatedAt">[] = [
@@ -35,14 +35,11 @@ const seedData: Omit<Member, "createdAt" | "updatedAt">[] = [
 
 const seedMembers = async () => {
   try {
-    console.log("シードデータの作成を開始します...");
 
     for (const member of seedData) {
-      await memberOperations.createMember(member as Member);
-      console.log(`メンバーを作成しました: ${member.memberName}`);
+      await createMember(member as Member);
     }
 
-    console.log("シードデータの作成が完了しました！");
   } catch (error) {
     alert("エラーが発生しました:" + error);
   }
