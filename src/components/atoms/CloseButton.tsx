@@ -7,8 +7,9 @@ type Props = {
 };
 
 const CloseButton: React.FC<Props> = ({ onClose, fetchMembers }) => {
+
   const handleClose = async () => {
-    await fetchMembers();
+    fetchMembers();
     onClose(false);
   };
 
