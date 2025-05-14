@@ -3,9 +3,11 @@ import TabDeleteButton from "../atoms/TabDeleteButton";
 import { useState } from "react";
 import DepartmentType from "../../types/department";
 
-const DepartmentTabs: React.FC<{ initialDepartments: DepartmentType[] }> = ({
-  initialDepartments,
-}) => {
+type Props = {
+  initialDepartments: DepartmentType[];
+};
+
+const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
   const [departments, setDepartments] = useState<DepartmentType[]>(initialDepartments);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState<number>(
     initialDepartments[0]?.departmentId ?? 0
@@ -41,8 +43,8 @@ const DepartmentTabs: React.FC<{ initialDepartments: DepartmentType[] }> = ({
             label={department.departmentName}
             icon={
               <TabDeleteButton
-                departmentId={department.departmentId}
-                departmentName={department.departmentName}
+                // departmentId={department.departmentId}
+                // departmentName={department.departmentName}
                 onDelete={() => handleDeleteDepartment(department.departmentId)}
               />
             }
