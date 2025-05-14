@@ -2,19 +2,19 @@ import { Wheel } from "react-custom-roulette";
 import { generateWheelColors } from "../../utils/generateWheelColors";
 import { Member } from "../../api/dynamoDB/types";
 
-type RouletteWheelProps = {
+type Props = {
   mustStartSpinning: boolean;
   prizeNumber: number;
   members: Member[];
   onStopSpinning: () => void;
 };
 
-const RouletteWheel = ({
+const RouletteWheel: React.FC<Props> = ({
   mustStartSpinning,
   prizeNumber,
   members,
   onStopSpinning,
-}: RouletteWheelProps) => {
+}) => {
   // メンバーの数に応じた色を生成
   const wheelColors = generateWheelColors(members.length);
 
