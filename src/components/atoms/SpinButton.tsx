@@ -1,12 +1,11 @@
 import CommonButton from "./CommonButton";
 
-const SpinButton = ({
-  onClick,
-  disabled,
-}: {
+type Props = {
   onClick: () => void;
   disabled: boolean;
-}) => {
+};
+
+const SpinButton: React.FC<Props> = ({ onClick, disabled }) => {
   return (
     <CommonButton onClick={onClick} disabled={disabled}>
       開始
