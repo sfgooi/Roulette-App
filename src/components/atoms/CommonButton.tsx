@@ -13,17 +13,17 @@ const StyledMuiButton = styled(Button)({
   },
 });
 
-type CommonButtonProps = {
+type Props = {
   onClick: () => void;
   disabled?: boolean;
   children: React.ReactNode;
 };
 
-const CommonButton = ({
+const CommonButton: React.FC<Props> = ({
   onClick,
   disabled = false,
   children,
-}: CommonButtonProps) => {
+}) => {
   return (
     <StyledMuiButton
       variant="contained"

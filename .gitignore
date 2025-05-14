@@ -24,6 +24,7 @@ env/local/.env.local
 *.njsproj
 *.sln
 *.sw?
+shared-local-instance.db
 
 
 # Terraform
