@@ -15,6 +15,36 @@ import {
   getAllMembers,
 } from "../../api/dynamoDB/operations/member";
 
+const columns: GridColDef[] = [
+  {
+    field: "id",
+    type: "number",
+    headerName: "id",
+    headerAlign: "left",
+    align: "left",
+    width: 100,
+  },
+  {
+    field: "memberName",
+    type: "string",
+    headerName: "名前",
+    headerAlign: "left",
+    align: "left",
+    editable: true,
+    width: 250,
+  },
+  {
+    field: "size",
+    type: "number",
+    headerName: "サイズ",
+    headerAlign: "left",
+    align: "left",
+    flex: 1,
+    editable: true,
+    width: 250,
+  },
+];
+
 type Props = {
   members: Member[];
   setMembers: React.Dispatch<React.SetStateAction<Member[]>>;
@@ -40,7 +70,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         departmentName: member.departmentName,
       }))
     );
-  }, []);
+  }, [setMembers]);
 
   useEffect(() => {
     fetchMembers();
@@ -53,36 +83,6 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
       }))
     );
   }, []);
-
-  const columns: GridColDef[] = [
-    {
-      field: "id",
-      type: "number",
-      headerName: "id",
-      headerAlign: "left",
-      align: "left",
-      width: 100,
-    },
-    {
-      field: "memberName",
-      type: "string",
-      headerName: "名前",
-      headerAlign: "left",
-      align: "left",
-      editable: true,
-      width: 250,
-    },
-    {
-      field: "size",
-      type: "number",
-      headerName: "サイズ",
-      headerAlign: "left",
-      align: "left",
-      flex: 1,
-      editable: true,
-      width: 250,
-    },
-  ];
 
   const checkForChanges = useCallback(
     (currentMembers: Member[]) => {
