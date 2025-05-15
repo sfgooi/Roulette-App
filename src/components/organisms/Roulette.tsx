@@ -3,7 +3,11 @@ import SpinButton from "../atoms/SpinButton";
 import RouletteWheel from "../molecules/RouletteWheel";
 import { Member } from "../../api/dynamoDB/types";
 
-const Roulette: React.FC<{ members: Member[] }> = ({ members }) => {
+type Props = {
+  members: Member[];
+};
+
+const Roulette: React.FC<Props> = ({ members }) => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
 
