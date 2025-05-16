@@ -25,12 +25,12 @@ const createTable = async () => {
   try {
     await dynamoDb.send(command);
   } catch (error) {
-    alert("エラーが発生しました:" + error);
+    console.error("エラーが発生しました:" + error);
     process.exit(1);
   }
 };
 
 createTable().catch((error) => {
-  alert("予期せぬエラーが発生しました:" + error);
+  console.error("予期せぬエラーが発生しました:" + error);
   process.exit(1);
 });

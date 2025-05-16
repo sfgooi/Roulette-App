@@ -41,7 +41,7 @@ const seedMembers = async () => {
     }
 
   } catch (error) {
-    alert("エラーが発生しました:" + error);
+    console.error("エラーが発生しました:" + error);
   }
 };
 
