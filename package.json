@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --mode local",
     "lint": "eslint .",
     "preview": "vite preview",
     "db:start": "docker compose up -d",
     "db:stop": "docker compose down",
-    "db:create": "tsx scripts/createTable.ts",
-    "db:seed": "tsx scripts/seedMembers.ts",
+    "db:create": "vite-node scripts/createTable.ts",
+    "db:seed": "vite-node scripts/seedMembers.ts",
     "db:setup": "pnpm db:create && pnpm db:seed",
     "db:admin": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin",
     "build:prod": "vite build --mode production",
@@ -48,6 +48,7 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vite-node": "^3.1.3"
   }
 }
