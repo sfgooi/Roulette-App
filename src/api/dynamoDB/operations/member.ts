@@ -24,7 +24,7 @@ export const getAllMembers = async (): Promise<Member[]> => {
 };
 
 // メンバー作成/更新
-export const createMember = async (member: Member): Promise<void> => {
+export const createMember = async (member: Omit<Member, "createdAt" | "updatedAt">): Promise<void> => {
   const command = new PutCommand({
     TableName: TABLE_NAME,
     Item: {
