@@ -1,7 +1,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-const isDevelopment = import.meta.env.MODE === "development";
+const isDevelopment = import.meta.env.VITE_MODE === "local";
 
 const client = new DynamoDBClient(
   isDevelopment
