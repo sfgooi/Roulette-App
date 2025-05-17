@@ -33,16 +33,16 @@ const seedData: Omit<Member, "createdAt" | "updatedAt">[] = [
   },
 ];
 
-const seedMembers = async () => {
+const seedMembers = async (
+  seedData: Omit<Member, "createdAt" | "updatedAt">[]
+) => {
   try {
-
     for (const member of seedData) {
       await createMember(member as Member);
     }
-
   } catch (error) {
     console.error("エラーが発生しました:" + error);
   }
 };
 
-seedMembers();
+seedMembers(seedData);
