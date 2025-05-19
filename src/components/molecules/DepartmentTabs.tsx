@@ -8,21 +8,22 @@ type Props = {
 };
 
 const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
-  const [departments, setDepartments] = useState<DepartmentType[]>(initialDepartments);
-  const [selectedDepartmentId, setSelectedDepartmentId] = useState<number>(
-    initialDepartments[0]?.departmentId ?? 0
+  const [departments, setDepartments] =
+    useState<DepartmentType[]>(initialDepartments);
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState<string>(
+    initialDepartments[0]?.departmentName ?? ""
   );
 
   const handleTabChange = (
     event: React.SyntheticEvent,
-    newDepartmentId: number
+    newDepartmentName: string
   ) => {
-    setSelectedDepartmentId(newDepartmentId);
+    setSelectedDepartmentId(newDepartmentName);
   };
 
-  const handleDeleteDepartment = (departmentId: number) => {
+  const handleDeleteDepartment = (departmentName: string) => {
     const newDepartments = departments.filter(
-      (dept) => dept.departmentId !== departmentId
+      (dept) => dept.departmentName !== departmentName
     );
     setDepartments(newDepartments);
   };
@@ -38,14 +39,16 @@ const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
       >
         {departments.map((department: DepartmentType) => (
           <Tab
-            key={department.departmentId}
-            value={department.departmentId}
+            key={department.departmentName}
+            value={department.departmentName}
             label={department.departmentName}
             icon={
               <TabDeleteButton
                 // departmentId={department.departmentId}
                 // departmentName={department.departmentName}
-                onDelete={() => handleDeleteDepartment(department.departmentId)}
+                onDelete={() =>
+                  handleDeleteDepartment(department.departmentName)
+                }
               />
             }
             iconPosition="end"
