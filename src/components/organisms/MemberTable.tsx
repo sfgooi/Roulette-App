@@ -66,7 +66,6 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     setOriginalMembers(members);
     setDepartments(
       members.map((member: Member) => ({
-        departmentId: member.departmentId,
         departmentName: member.departmentName,
       }))
     );
@@ -78,7 +77,6 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     setOriginalMembers(members);
     setDepartments(
       members.map((member) => ({
-        departmentId: member.departmentId,
         departmentName: member.departmentName,
       }))
     );

@@ -11,7 +11,9 @@ type Props = {
   onDelete: () => void;
 };
 
-const TabDeleteButton: React.FC<Props> = ({ onDelete }) => {
+const TabDeleteButton: React.FC<Props> = ({
+  onDelete,
+}) => {
   return (
     <StyledIconButton size="small" onClick={onDelete}>
       <RxCrossCircled />

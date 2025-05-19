@@ -1,5 +1,4 @@
 export type Member = {
-  departmentId: number;
   departmentName: string;
   memberId: number;
   memberName: string;

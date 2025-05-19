@@ -12,7 +12,6 @@
     "db:stop": "docker compose down",
     "db:create": "vite-node scripts/createTable.ts --mode local",
     "db:seed": "vite-node scripts/seedMembers.ts --mode local",
-    "db:setup": "pnpm db:create && pnpm db:seed",
     "db:admin": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin",
     "build:prod": "vite build --mode production",
     "deploy:frontend": "aws s3 sync dist/ s3://your-app-frontend",
