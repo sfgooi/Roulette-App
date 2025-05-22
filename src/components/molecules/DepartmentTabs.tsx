@@ -1,6 +1,6 @@
 import { Tab, Tabs, Box } from "@mui/material";
 import TabDeleteButton from "../atoms/TabDeleteButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DepartmentType from "../../types/department";
 
 type Props = {
@@ -13,6 +13,10 @@ const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState<string>(
     initialDepartments[0]?.departmentName ?? ""
   );
+
+  useEffect(() => {
+    setDepartments(initialDepartments);
+  }, [initialDepartments]);
 
   const handleTabChange = (
     event: React.SyntheticEvent,

@@ -59,28 +59,19 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [hasChanges, setHasChanges] = useState(false);
 
-  const fetchMembers = useCallback(async () => {
-    const members = await getAllMembers();
-
-    setMembers(members);
-    setOriginalMembers(members);
-    setDepartments(
-      members.map((member: Member) => ({
-        departmentName: member.departmentName,
-      }))
-    );
-  }, [setMembers]);
-
   useEffect(() => {
     fetchMembers();
     setMembers(members);
     setOriginalMembers(members);
-    setDepartments(
-      members.map((member) => ({
-        departmentName: member.departmentName,
-      }))
-    );
+    setDepartments(getUniqueDepartments(members));
   }, []);
+
+  const fetchMembers = useCallback(async () => {
+    const members = await getAllMembers();
+    setMembers(members);
+    setOriginalMembers(members);
+    setDepartments(getUniqueDepartments(members));
+  }, [setMembers]);
 
   const checkForChanges = useCallback(
     (currentMembers: Member[]) => {
@@ -113,7 +104,6 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         memberId: newId,
         memberName: "新規ユーザー",
         size: 1,
-        departmentId: 1,
         departmentName: "TODO：部署",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -167,6 +157,14 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     } catch (error) {
       alert("保存中にエラーが発生しました。やり直してください。" + error);
     }
+  };
+
+  const getUniqueDepartments = (members: Member[]) => {
+    return Array.from(
+      new Set(members.map((member) => member.departmentName))
+    ).map((departmentName) => ({
+      departmentName,
+    }));
   };
 
   return (
