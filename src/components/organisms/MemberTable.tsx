@@ -220,9 +220,10 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
               id: member.memberId,
               memberName: member.memberName,
               size: member.size,
+              departmentName: member.departmentName,
             };
           })}
-          columns={columns}
+          columns={selectedDepartment === "ALL" ? AllColumns : columns}
           processRowUpdate={handleUpdateMembers}
           checkboxSelection
           disableColumnMenu
@@ -246,6 +247,45 @@ const columns: GridColDef[] = [
     headerAlign: "left",
     align: "left",
     width: 100,
+  },
+  {
+    field: "memberName",
+    type: "string",
+    headerName: "名前",
+    headerAlign: "left",
+    align: "left",
+    editable: true,
+    width: 250,
+  },
+  {
+    field: "size",
+    type: "number",
+    headerName: "サイズ",
+    headerAlign: "left",
+    align: "left",
+    flex: 1,
+    editable: true,
+    width: 250,
+  },
+];
+
+const AllColumns: GridColDef[] = [
+  {
+    field: "id",
+    type: "number",
+    headerName: "id",
+    headerAlign: "left",
+    align: "left",
+    width: 100,
+  },
+  {
+    field: "departmentName",
+    type: "string",
+    headerName: "部署",
+    headerAlign: "left",
+    align: "left",
+    editable: true,
+    width: 150,
   },
   {
     field: "memberName",
