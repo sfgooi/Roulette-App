@@ -165,6 +165,20 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     checkForChanges(updatedMembers);
   };
 
+  const handleDepartmentAdd = (departmentName: string) => {
+    const newMember = {
+      memberId: Math.max(...members.map((member) => member.memberId)) + 1,
+      memberName: "新規ユーザー",
+      size: 1,
+      departmentName: departmentName,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    const updatedMembers = [...members, newMember];
+    setMembers(updatedMembers);
+    checkForChanges(updatedMembers);
+  };
+
   const filteredMembers = useMemo(() => {
     return selectedDepartment === "ALL"
       ? members
@@ -212,6 +226,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         onDepartmentChange={handleDepartmentChange}
         onDepartmentNameChange={handleDepartmentNameUpdate}
         onDepartmentDelete={handleDepartmentDelete}
+        onDepartmentAdd={handleDepartmentAdd}
       />
       <div style={{ height: 600, width: "100%" }}>
         <DataGrid

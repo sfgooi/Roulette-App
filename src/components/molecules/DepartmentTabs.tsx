@@ -1,5 +1,6 @@
 import { Tab, Tabs, Box, TextField } from "@mui/material";
 import TabDeleteButton from "../atoms/TabDeleteButton";
+import TabAddButton from "../atoms/TabAddButton";
 import { useState, useEffect } from "react";
 import DepartmentType from "../../types/department";
 
@@ -8,6 +9,7 @@ type Props = {
   onDepartmentChange: (departmentName: string) => void;
   onDepartmentNameChange?: (oldName: string, newName: string) => void;
   onDepartmentDelete?: (departmentName: string) => void;
+  onDepartmentAdd?: (departmentName: string) => void;
 };
 
 const DepartmentTabs: React.FC<Props> = ({
@@ -15,6 +17,7 @@ const DepartmentTabs: React.FC<Props> = ({
   onDepartmentChange,
   onDepartmentNameChange,
   onDepartmentDelete,
+  onDepartmentAdd,
 }) => {
   const [departments, setDepartments] =
     useState<DepartmentType[]>(initialDepartments);
@@ -48,6 +51,13 @@ const DepartmentTabs: React.FC<Props> = ({
     );
     setDepartments(newDepartments);
     onDepartmentDelete?.(departmentName);
+  };
+
+  const handleAddDepartment = () => {
+    const newDepartmentName = `部署${departments.length + 1}`;
+    const newDepartment = { departmentName: newDepartmentName };
+    setDepartments([...departments, newDepartment]);
+    onDepartmentAdd?.(newDepartmentName);
   };
 
   const handleDepartmentNameDoubleClick = (departmentName: string) => {
@@ -134,8 +144,6 @@ const DepartmentTabs: React.FC<Props> = ({
             }
             icon={
               <TabDeleteButton
-                // departmentId={department.departmentId}
-                // departmentName={department.departmentName}
                 onDelete={() =>
                   handleDeleteDepartment(department.departmentName)
                 }
@@ -149,6 +157,18 @@ const DepartmentTabs: React.FC<Props> = ({
             }}
           />
         ))}
+        <Tab
+          key="add"
+          value="add"
+          icon={<TabAddButton onAdd={handleAddDepartment} />}
+          sx={{
+            minWidth: "40px",
+            padding: "8px",
+            ":focus": {
+              outline: "none",
+            },
+          }}
+        />
       </Tabs>
     </Box>
   );
