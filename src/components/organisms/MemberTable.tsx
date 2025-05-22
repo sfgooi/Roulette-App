@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import {
   DataGrid,
   GridColDef,
@@ -15,7 +15,6 @@ import {
   getAllMembers,
 } from "../../api/dynamoDB/operations/member";
 
-
 type Props = {
   members: Member[];
   setMembers: React.Dispatch<React.SetStateAction<Member[]>>;
@@ -29,6 +28,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
   );
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [hasChanges, setHasChanges] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState<string>("ALL");
 
   useEffect(() => {
     fetchMembers();
@@ -138,6 +138,18 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     }));
   };
 
+  const handleDepartmentChange = (departmentName: string) => {
+    setSelectedDepartment(departmentName);
+  };
+
+  const filteredMembers = useMemo(() => {
+    return selectedDepartment === "ALL"
+      ? members
+      : members.filter(
+          (member) => member.departmentName === selectedDepartment
+        );
+  }, [selectedDepartment, members]);
+
   return (
     <div>
       <Stack
@@ -168,10 +180,13 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         </Stack>
         <CloseButton onClose={onClose} fetchMembers={fetchMembers} />
       </Stack>
-      <DepartmentTabs initialDepartments={departments} />
+      <DepartmentTabs
+        initialDepartments={departments}
+        onDepartmentChange={handleDepartmentChange}
+      />
       <div style={{ height: 600, width: "100%" }}>
         <DataGrid
-          rows={members.map((member) => {
+          rows={filteredMembers.map((member) => {
             return {
               id: member.memberId,
               memberName: member.memberName,

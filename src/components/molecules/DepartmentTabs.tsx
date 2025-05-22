@@ -5,9 +5,13 @@ import DepartmentType from "../../types/department";
 
 type Props = {
   initialDepartments: DepartmentType[];
+  onDepartmentChange: (departmentName: string) => void;
 };
 
-const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
+const DepartmentTabs: React.FC<Props> = ({
+  initialDepartments,
+  onDepartmentChange,
+}) => {
   const [departments, setDepartments] =
     useState<DepartmentType[]>(initialDepartments);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState<string>(
@@ -23,6 +27,7 @@ const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
     newDepartmentName: string
   ) => {
     setSelectedDepartmentId(newDepartmentName);
+    onDepartmentChange(newDepartmentName);
   };
 
   const handleDeleteDepartment = (departmentName: string) => {
