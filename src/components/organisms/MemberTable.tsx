@@ -173,7 +173,11 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         sx={{ mb: 2, justifyContent: "space-between" }}
       >
         <Stack direction="row" spacing={2}>
-          <Button variant="contained" onClick={handleAddUser}>
+          <Button
+            disabled={selectedDepartment === "ALL"}
+            variant="contained"
+            onClick={handleAddUser}
+          >
             メンバーを追加
           </Button>
           <Button
