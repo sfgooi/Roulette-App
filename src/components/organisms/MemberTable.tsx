@@ -157,6 +157,14 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     checkForChanges(updatedMembers);
   };
 
+  const handleDepartmentDelete = (departmentName: string) => {
+    const updatedMembers = members.filter(
+      (member) => member.departmentName !== departmentName
+    );
+    setMembers(updatedMembers);
+    checkForChanges(updatedMembers);
+  };
+
   const filteredMembers = useMemo(() => {
     return selectedDepartment === "ALL"
       ? members
@@ -203,6 +211,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         initialDepartments={departments}
         onDepartmentChange={handleDepartmentChange}
         onDepartmentNameChange={handleDepartmentNameUpdate}
+        onDepartmentDelete={handleDepartmentDelete}
       />
       <div style={{ height: 600, width: "100%" }}>
         <DataGrid

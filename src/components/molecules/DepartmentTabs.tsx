@@ -7,12 +7,14 @@ type Props = {
   initialDepartments: DepartmentType[];
   onDepartmentChange: (departmentName: string) => void;
   onDepartmentNameChange?: (oldName: string, newName: string) => void;
+  onDepartmentDelete?: (departmentName: string) => void;
 };
 
 const DepartmentTabs: React.FC<Props> = ({
   initialDepartments,
   onDepartmentChange,
   onDepartmentNameChange,
+  onDepartmentDelete,
 }) => {
   const [departments, setDepartments] =
     useState<DepartmentType[]>(initialDepartments);
@@ -37,10 +39,15 @@ const DepartmentTabs: React.FC<Props> = ({
   };
 
   const handleDeleteDepartment = (departmentName: string) => {
+    if (departments.length <= 1) {
+      alert("部署は最低1つ必要です。");
+      return;
+    }
     const newDepartments = departments.filter(
       (dept) => dept.departmentName !== departmentName
     );
     setDepartments(newDepartments);
+    onDepartmentDelete?.(departmentName);
   };
 
   const handleDepartmentNameDoubleClick = (departmentName: string) => {
