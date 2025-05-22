@@ -40,7 +40,25 @@ const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
         variant="scrollable"
         scrollButtons
         aria-label="Tabs"
+        sx={{
+          minHeight: "40px",
+          "& .MuiTab-root": {
+            minHeight: "40px",
+            padding: "8px 16px 12px",
+          },
+        }}
       >
+        <Tab
+          key={"ALL"}
+          value={"ALL"}
+          label={"ALL"}
+          iconPosition="end"
+          sx={{
+            ":focus": {
+              outline: "none",
+            },
+          }}
+        />
         {departments.map((department: DepartmentType) => (
           <Tab
             key={department.departmentName}
@@ -56,6 +74,11 @@ const DepartmentTabs: React.FC<Props> = ({ initialDepartments }) => {
               />
             }
             iconPosition="end"
+            sx={{
+              ":focus": {
+                outline: "none",
+              },
+            }}
           />
         ))}
       </Tabs>
