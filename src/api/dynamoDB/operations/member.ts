@@ -24,11 +24,14 @@ export const getAllMembers = async (): Promise<Member[]> => {
 };
 
 // メンバー作成/更新
-export const createMember = async (member: Omit<Member, "createdAt" | "updatedAt">): Promise<void> => {
+export const createMember = async (
+  member: Omit<Member, "createdAt" | "updatedAt">
+): Promise<void> => {
   const command = new PutCommand({
     TableName: TABLE_NAME,
     Item: {
       ...member,
+      departmentName: member.departmentName || "【未所属】", // デフォルト値を設定
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
@@ -89,10 +92,11 @@ export const saveMembers = async (
               memberId: member.memberId,
             },
             UpdateExpression:
-              "SET memberName = :name, size = :size, updatedAt = :updatedAt",
+              "SET memberName = :name, size = :size, departmentName = :departmentName, updatedAt = :updatedAt",
             ExpressionAttributeValues: {
               ":name": member.memberName,
               ":size": member.size,
+              ":departmentName": member.departmentName,
               ":updatedAt": new Date().toISOString(),
             },
           });

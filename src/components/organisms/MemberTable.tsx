@@ -58,7 +58,8 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         return (
           !originalMember ||
           originalMember.memberName !== currentMember.memberName ||
-          originalMember.size !== currentMember.size
+          originalMember.size !== currentMember.size ||
+          originalMember.departmentName !== currentMember.departmentName
         );
       });
 
@@ -75,7 +76,8 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
         memberId: newId,
         memberName: "新規ユーザー",
         size: 1,
-        departmentName: "TODO：部署",
+        departmentName:
+          selectedDepartment === "ALL" ? "未分類" : selectedDepartment,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
@@ -142,6 +144,19 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
     setSelectedDepartment(departmentName);
   };
 
+  const handleDepartmentNameUpdate = (
+    oldDepartmentName: string,
+    newDepartmentName: string
+  ) => {
+    const updatedMembers = members.map((member) =>
+      member.departmentName === oldDepartmentName
+        ? { ...member, departmentName: newDepartmentName }
+        : member
+    );
+    setMembers(updatedMembers);
+    checkForChanges(updatedMembers);
+  };
+
   const filteredMembers = useMemo(() => {
     return selectedDepartment === "ALL"
       ? members
@@ -183,6 +198,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
       <DepartmentTabs
         initialDepartments={departments}
         onDepartmentChange={handleDepartmentChange}
+        onDepartmentNameChange={handleDepartmentNameUpdate}
       />
       <div style={{ height: 600, width: "100%" }}>
         <DataGrid

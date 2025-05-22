@@ -1,4 +1,4 @@
-import { Tab, Tabs, Box } from "@mui/material";
+import { Tab, Tabs, Box, TextField } from "@mui/material";
 import TabDeleteButton from "../atoms/TabDeleteButton";
 import { useState, useEffect } from "react";
 import DepartmentType from "../../types/department";
@@ -6,17 +6,23 @@ import DepartmentType from "../../types/department";
 type Props = {
   initialDepartments: DepartmentType[];
   onDepartmentChange: (departmentName: string) => void;
+  onDepartmentNameChange?: (oldName: string, newName: string) => void;
 };
 
 const DepartmentTabs: React.FC<Props> = ({
   initialDepartments,
   onDepartmentChange,
+  onDepartmentNameChange,
 }) => {
   const [departments, setDepartments] =
     useState<DepartmentType[]>(initialDepartments);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState<string>(
     initialDepartments[0]?.departmentName ?? ""
   );
+  const [editingDepartmentName, setEditingDepartmentName] = useState<
+    string | null
+  >(null);
+  const [editingDepartmentValue, setEditingDepartmentValue] = useState("");
 
   useEffect(() => {
     setDepartments(initialDepartments);
@@ -35,6 +41,36 @@ const DepartmentTabs: React.FC<Props> = ({
       (dept) => dept.departmentName !== departmentName
     );
     setDepartments(newDepartments);
+  };
+
+  const handleDepartmentNameDoubleClick = (departmentName: string) => {
+    setEditingDepartmentName(departmentName);
+    setEditingDepartmentValue(departmentName);
+  };
+
+  const handleDepartmentNameEditComplete = () => {
+    if (
+      editingDepartmentName &&
+      editingDepartmentValue &&
+      editingDepartmentName !== editingDepartmentValue
+    ) {
+      const newDepartments = departments.map((dept) =>
+        dept.departmentName === editingDepartmentName
+          ? { ...dept, departmentName: editingDepartmentValue }
+          : dept
+      );
+      setDepartments(newDepartments);
+      onDepartmentNameChange?.(editingDepartmentName, editingDepartmentValue);
+    }
+    setEditingDepartmentName(null);
+  };
+
+  const handleDepartmentNameKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleDepartmentNameEditComplete();
+    } else if (event.key === "Escape") {
+      setEditingDepartmentName(null);
+    }
   };
 
   return (
@@ -68,7 +104,27 @@ const DepartmentTabs: React.FC<Props> = ({
           <Tab
             key={department.departmentName}
             value={department.departmentName}
-            label={department.departmentName}
+            label={
+              editingDepartmentName === department.departmentName ? (
+                <TextField
+                  value={editingDepartmentValue}
+                  onChange={(e) => setEditingDepartmentValue(e.target.value)}
+                  onBlur={handleDepartmentNameEditComplete}
+                  onKeyDown={handleDepartmentNameKeyPress}
+                  autoFocus
+                  size="small"
+                  sx={{ width: "100px" }}
+                />
+              ) : (
+                <span
+                  onDoubleClick={() =>
+                    handleDepartmentNameDoubleClick(department.departmentName)
+                  }
+                >
+                  {department.departmentName}
+                </span>
+              )
+            }
             icon={
               <TabDeleteButton
                 // departmentId={department.departmentId}
