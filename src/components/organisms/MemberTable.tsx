@@ -110,6 +110,7 @@ const MemberTable: React.FC<Props> = ({ onClose, members, setMembers }) => {
             ...member,
             memberName: newRow.memberName,
             size: newRow.size,
+            departmentName: newRow.departmentName,
           }
         : member
     );
