@@ -22,7 +22,7 @@ const DepartmentTabs: React.FC<Props> = ({
   const [departments, setDepartments] =
     useState<DepartmentType[]>(initialDepartments);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState<string>(
-    initialDepartments[0]?.departmentName ?? ""
+    initialDepartments.length > 0 ? initialDepartments[0].departmentName : "ALL"
   );
   const [editingDepartmentName, setEditingDepartmentName] = useState<
     string | null
@@ -31,6 +31,13 @@ const DepartmentTabs: React.FC<Props> = ({
 
   useEffect(() => {
     setDepartments(initialDepartments);
+    if (
+      !initialDepartments.some(
+        (dept) => dept.departmentName === selectedDepartmentId
+      )
+    ) {
+      setSelectedDepartmentId("ALL");
+    }
   }, [initialDepartments]);
 
   const handleTabChange = (
