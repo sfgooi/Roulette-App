@@ -1,9 +1,13 @@
 import { RxCrossCircled } from "react-icons/rx";
-import { IconButton, styled } from "@mui/material";
+import { styled } from "@mui/material";
 
-const StyledIconButton = styled(IconButton)({
+const StyledDiv = styled("div")({
   padding: "4px",
-  "&:hover": { backgroundColor: "initial" },
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "&:hover": { opacity: 0.7 },
   "&:focus": { outline: "none" },
 });
 
@@ -11,13 +15,11 @@ type Props = {
   onDelete: () => void;
 };
 
-const TabDeleteButton: React.FC<Props> = ({
-  onDelete,
-}) => {
+const TabDeleteButton: React.FC<Props> = ({ onDelete }) => {
   return (
-    <StyledIconButton size="small" onClick={onDelete}>
+    <StyledDiv onClick={onDelete}>
       <RxCrossCircled />
-    </StyledIconButton>
+    </StyledDiv>
   );
 };
 

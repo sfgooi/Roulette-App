@@ -1,9 +1,13 @@
-import { IconButton, styled } from "@mui/material";
 import { IoMdAdd } from "react-icons/io";
+import { styled } from "@mui/material";
 
-const StyledIconButton = styled(IconButton)({
+const StyledDiv = styled("div")({
   padding: "4px",
-  "&:hover": { backgroundColor: "initial" },
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "&:hover": { opacity: 0.7 },
   "&:focus": { outline: "none" },
 });
 
@@ -13,9 +17,9 @@ type Props = {
 
 const TabAddButton: React.FC<Props> = ({ onAdd }) => {
   return (
-    <StyledIconButton size="small" onClick={onAdd}>
+    <StyledDiv onClick={onAdd}>
       <IoMdAdd />
-    </StyledIconButton>
+    </StyledDiv>
   );
 };
 
