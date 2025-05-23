@@ -7,11 +7,20 @@ import Roulette from "./components/organisms/Roulette";
 import { Member } from "./api/dynamoDB/types";
 import { useEffect } from "react";
 import { getAllMembers } from "./api/dynamoDB/operations/member";
+import Footer from "./components/atoms/footer";
+import {
+  FormControl,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from "@mui/material";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [members, setMembers] = useState<Member[]>([]);
+  const [filteredMembers, setFilteredMembers] = useState<Member[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedDepartment, setSelectedDepartment] = useState<string>("ALL");
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -19,6 +28,7 @@ function App() {
         setIsLoading(true);
         const members = await getAllMembers();
         setMembers(members);
+        setFilteredMembers(members);
       } finally {
         setIsLoading(false);
       }
@@ -27,21 +37,65 @@ function App() {
     fetchMembers();
   }, []);
 
+  useEffect(() => {
+    if (selectedDepartment === "ALL") {
+      setFilteredMembers(members);
+    } else {
+      setFilteredMembers(
+        members.filter((member) => member.departmentName === selectedDepartment)
+      );
+    }
+  }, [selectedDepartment, members]);
+
+  const handleDepartmentChange = (event: SelectChangeEvent) => {
+    setSelectedDepartment(event.target.value);
+  };
+
+  const uniqueDepartments = Array.from(
+    new Set(members.map((member) => member.departmentName))
+  ).filter((dept) => dept !== undefined && dept !== null);
+
   if (isLoading) {
     return <div>読み込み中...</div>;
   }
 
   return (
     <>
-      <Heading text="幹事ルーレット ver 1.0.0" />
-      <CommonButton color="info" onClick={() => setIsModalOpen(true)}>設定</CommonButton>
-      <Roulette members={members} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem",
+        }}
+      >
+        <FormControl sx={{ minWidth: 120 }}>
+          <Select
+            value={selectedDepartment}
+            onChange={handleDepartmentChange}
+            size="small"
+          >
+            <MenuItem value="ALL">全部署</MenuItem>
+            {uniqueDepartments.map((dept) => (
+              <MenuItem key={dept} value={dept}>
+                {dept}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Heading text="幹事ルーレット" />
+      </div>
+      <CommonButton color="info" onClick={() => setIsModalOpen(true)}>
+        詳細設定
+      </CommonButton>
+      <Roulette members={filteredMembers} />
       <SettingsModal
         members={members}
         setMembers={setMembers}
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+      <Footer text="ver1.0.0" />
     </>
   );
 }

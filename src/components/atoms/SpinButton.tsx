@@ -8,7 +8,7 @@ type Props = {
 const SpinButton: React.FC<Props> = ({ onClick, disabled }) => {
   return (
     <CommonButton color="primary" onClick={onClick} disabled={disabled}>
-      開始
+      ルーレット開始
     </CommonButton>
   );
 };
