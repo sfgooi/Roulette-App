@@ -12,13 +12,7 @@
     "db:stop": "docker compose down",
     "db:create": "vite-node scripts/createTable.ts --mode local",
     "db:seed": "vite-node scripts/seedMembers.ts --mode local",
-    "db:admin": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin",
-    "build:prod": "vite build --mode production",
-    "deploy:frontend": "aws s3 sync dist/ s3://your-app-frontend",
-    "deploy:lambda": "cd dist/lambda && zip -r ../lambda.zip . && aws lambda update-function-code --function-name members-handler --zip-file fileb://../lambda.zip",
-    "build:lambda": "tsc -p sam/src/tsconfig.json",
-    "sam:build": "npm run build:lambda && sam build",
-    "sam:local": "npm run sam:build && sam local invoke MembersFunction --event sam/events/event.json"
+    "db:admin": "DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.782.0",

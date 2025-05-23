@@ -7,7 +7,7 @@ import Roulette from "./components/organisms/Roulette";
 import { Member } from "./api/dynamoDB/types";
 import { useEffect } from "react";
 import { getAllMembers } from "./api/dynamoDB/operations/member";
-import Footer from "./components/atoms/footer";
+import Footer from "./components/atoms/Footer";
 import {
   FormControl,
   Select,
