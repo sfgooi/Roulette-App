@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <Heading text="幹事ルーレット ver 1.0.0" />
-      <CommonButton onClick={() => setIsModalOpen(true)}>設定</CommonButton>
+      <CommonButton color="info" onClick={() => setIsModalOpen(true)}>設定</CommonButton>
       <Roulette members={members} />
       <SettingsModal
         members={members}
