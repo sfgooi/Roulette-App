@@ -70,6 +70,7 @@ const DepartmentTabs: React.FC<Props> = ({
   const handleDepartmentNameDoubleClick = (departmentName: string) => {
     setEditingDepartmentName(departmentName);
     setEditingDepartmentValue(departmentName);
+    setSelectedDepartmentId("ALL");
   };
 
   const handleDepartmentNameEditComplete = () => {
@@ -85,6 +86,7 @@ const DepartmentTabs: React.FC<Props> = ({
       );
       setDepartments(newDepartments);
       onDepartmentNameChange?.(editingDepartmentName, editingDepartmentValue);
+      setSelectedDepartmentId(editingDepartmentValue);
     }
     setEditingDepartmentName(null);
   };
