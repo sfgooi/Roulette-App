@@ -28,6 +28,328 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* 深淵の宇宙から神秘的なオーロラへ */
+  background: linear-gradient(
+    135deg,
+    #000000 0%,
+    #0a0e27 15%,
+    #16213e 25%,
+    #1a1a2e 35%,
+    #0f3460 50%,
+    #533483 65%,
+    #8b6bb7 80%,
+    #2d4059 100%
+  );
+  background-size: 400% 400%;
+  animation: cosmicFlow 25s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 宇宙の流れアニメーション */
+@keyframes cosmicFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* オーロラエフェクト */
+body::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(
+      ellipse at 30% 40%,
+      rgba(138, 43, 226, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 70% 60%,
+      rgba(0, 191, 255, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 50% 30%,
+      rgba(255, 105, 180, 0.3) 0%,
+      transparent 60%
+    );
+  animation: auroraFlow 30s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes auroraFlow {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translate(10%, 10%) rotate(120deg);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-10%, 5%) rotate(240deg);
+    opacity: 0.7;
+  }
+}
+
+/* 輝く大きな星 - 第1層 */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 15% 25%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.5) 1%,
+      transparent 4%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(173, 216, 255, 1) 0%,
+      rgba(173, 216, 255, 0.5) 1%,
+      transparent 3%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(255, 182, 255, 1) 0%,
+      rgba(255, 182, 255, 0.5) 1%,
+      transparent 3.5%
+    ),
+    radial-gradient(
+      circle at 25% 80%,
+      rgba(255, 255, 200, 1) 0%,
+      rgba(255, 255, 200, 0.5) 1%,
+      transparent 3%
+    ),
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(200, 230, 255, 1) 0%,
+      rgba(200, 230, 255, 0.5) 1%,
+      transparent 4%
+    ),
+    radial-gradient(
+      circle at 92% 60%,
+      rgba(255, 220, 255, 1) 0%,
+      rgba(255, 220, 255, 0.5) 1%,
+      transparent 3%
+    ),
+    radial-gradient(
+      circle at 10% 55%,
+      rgba(230, 240, 255, 1) 0%,
+      rgba(230, 240, 255, 0.5) 1%,
+      transparent 3%
+    ),
+    radial-gradient(
+      circle at 60% 90%,
+      rgba(255, 240, 245, 1) 0%,
+      rgba(255, 240, 245, 0.5) 1%,
+      transparent 3.5%
+    );
+  animation: starShine 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes starShine {
+  0%,
+  100% {
+    opacity: 0.8;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(0.5px);
+  }
+}
+
+/* 無数の小さな星々 - 第2層 */
+#root::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 5% 12%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 18% 8%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 32% 25%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 47% 15%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 61% 22%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 73% 5%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 12% 42%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 28% 55%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 42% 38%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 55% 48%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 68% 62%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 82% 52%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 95% 45%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 8% 72%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 22% 88%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 38% 78%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 52% 92%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 65% 82%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 78% 95%,
+      rgba(255, 255, 255, 0.5) 0%,
+      transparent 0.5%
+    ),
+    radial-gradient(
+      circle at 92% 78%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 0.5%
+    );
+  animation: microStarTwinkle 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes microStarTwinkle {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* 流れ星エフェクト */
+#root::after {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  transform: rotate(-45deg);
+  animation: shootingStar 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes shootingStar {
+  0% {
+    top: -10%;
+    left: -10%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+  }
 }
 
 h1 {
@@ -57,12 +379,27 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+  }
+  body {
+    /* ライトモード：黄金の夕暮れから深紅の夜へ */
+    background: linear-gradient(
+      135deg,
+      #667eea 0%,
+      #764ba2 20%,
+      #f093fb 40%,
+      #f5576c 60%,
+      #feca57 80%,
+      #ee5a6f 100%
+    );
+    background-size: 400% 400%;
+    animation: cosmicFlow 25s ease-in-out infinite;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
 }

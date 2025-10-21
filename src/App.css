@@ -1,6 +1,56 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem;
   text-align: center;
+  position: relative;
+  z-index: 10;
+
+  /* 極上のガラスモーフィズム */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 40px;
+
+  /* 多層シャドウで立体感 */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 2px 16px 0 rgba(255, 255, 255, 0.1) inset,
+    0 -2px 16px 0 rgba(255, 255, 255, 0.05) inset,
+    0 0 80px 0 rgba(138, 43, 226, 0.2), 0 0 160px 0 rgba(0, 191, 255, 0.15);
+
+  /* グロー効果の境界線 */
+  border-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.1),
+      rgba(138, 43, 226, 0.3),
+      rgba(0, 191, 255, 0.3),
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.4)
+    )
+    1;
+
+  /* 微妙なアニメーション */
+  animation: containerGlow 8s ease-in-out infinite;
+}
+
+@keyframes containerGlow {
+  0%,
+  100% {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      0 2px 16px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -2px 16px 0 rgba(255, 255, 255, 0.05) inset,
+      0 0 80px 0 rgba(138, 43, 226, 0.2), 0 0 160px 0 rgba(0, 191, 255, 0.15);
+  }
+  50% {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      0 2px 16px 0 rgba(255, 255, 255, 0.1) inset,
+      0 -2px 16px 0 rgba(255, 255, 255, 0.05) inset,
+      0 0 100px 0 rgba(138, 43, 226, 0.4), 0 0 200px 0 rgba(0, 191, 255, 0.3);
+  }
 }

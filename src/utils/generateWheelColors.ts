@@ -1,15 +1,18 @@
-// 配色生成のためのユーティリティ関数
+// 配色生成のためのユーティリティ関数 - 美麗なグラデーション配色
 export const generateWheelColors = (count: number) => {
-  // 基本となるHSL色相値（0-360）を均等に分配
-  const baseHues = Array.from({ length: count }, (_, i) =>
-    Math.floor((360 / count) * i)
-  );
+  // 美麗な色相を選択（鮮やかな色を優先）
+  const baseHues = Array.from({ length: count }, (_, i) => {
+    // 黄金角（137.5度）を使って調和の取れた配色を生成
+    const goldenAngle = 137.5;
+    return Math.floor((goldenAngle * i) % 360);
+  });
 
-  // 各色相に対して彩度と明度を調整して配色を生成
+  // 各色相に対して高彩度・最適な明度で美麗な配色を生成
   return baseHues.map((hue, index) => {
-    // 交互に明度と彩度を変えて、隣接する色の区別を容易にする
-    const saturation = index % 2 === 0 ? "70%" : "60%";
-    const lightness = index % 2 === 0 ? "45%" : "55%";
+    // 高彩度で鮮やかに、明度は少し変化をつけて区別しやすく
+    const saturation =
+      index % 3 === 0 ? "85%" : index % 3 === 1 ? "75%" : "80%";
+    const lightness = index % 3 === 0 ? "50%" : index % 3 === 1 ? "45%" : "55%";
 
     return `hsl(${hue}, ${saturation}, ${lightness})`;
   });

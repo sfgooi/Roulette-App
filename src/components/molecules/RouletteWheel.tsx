@@ -35,11 +35,18 @@ const RouletteWheel: React.FC<Props> = ({
       data={wheelData}
       onStopSpinning={onStopSpinning}
       backgroundColors={backgroundColors}
-      textColors={Array(wheelData.length).fill("#fff")}
-      outerBorderWidth={2}
-      innerBorderWidth={2}
-      radiusLineWidth={2}
+      textColors={Array(wheelData.length).fill("#ffffff")}
+      outerBorderColor="#ffffff"
+      outerBorderWidth={8}
+      innerBorderColor="rgba(255, 255, 255, 0.5)"
+      innerBorderWidth={5}
+      innerRadius={10}
+      radiusLineColor="rgba(255, 255, 255, 0.3)"
+      radiusLineWidth={3}
       spinDuration={0.3}
+      fontSize={18}
+      textDistance={65}
+      perpendicularText={false}
     />
   );
 };

@@ -56,7 +56,9 @@ function App() {
   ).filter((dept) => dept !== undefined && dept !== null);
 
   if (isLoading) {
-    return <div>読み込み中...</div>;
+    return (
+      <div style={{ color: "#ffffff", fontSize: "1.5rem" }}>読み込み中...</div>
+    );
   }
 
   return (
@@ -74,6 +76,21 @@ function App() {
             value={selectedDepartment}
             onChange={handleDepartmentChange}
             size="small"
+            sx={{
+              color: "#ffffff",
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(255, 255, 255, 0.3)",
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(255, 255, 255, 0.5)",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(138, 43, 226, 0.8)",
+              },
+              "& .MuiSvgIcon-root": {
+                color: "#ffffff",
+              },
+            }}
           >
             <MenuItem value="ALL">全部署</MenuItem>
             {uniqueDepartments.map((dept) => (
@@ -83,7 +100,7 @@ function App() {
             ))}
           </Select>
         </FormControl>
-        <Heading text="幹事ルーレット" />
+        <Heading text="ルーレット" />
       </div>
       <CommonButton color="info" onClick={() => setIsModalOpen(true)}>
         詳細設定
