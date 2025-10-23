@@ -45,7 +45,7 @@ const RouletteWheel: React.FC<Props> = ({
       radiusLineWidth={3}
       spinDuration={0.3}
       fontSize={18}
-      textDistance={65}
+      textDistance={50}
       perpendicularText={false}
     />
   );
