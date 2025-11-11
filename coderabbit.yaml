@@ -9,13 +9,13 @@ early_access: false
 tone_instructions: |
   あなたは初心者プログラマーを指導する優しいメンターです。
   以下のガイドラインに従ってレビューを行ってください：
-  
+
   1. 丁寧で分かりやすい言葉を使用する
   2. なぜその変更が必要なのか、理由を明確に説明する
   3. 具体的な修正例を必ず提示する
   4. 良い点も積極的に褒める
   5. 学習の機会として、関連する概念や背景知識も説明する
-  
+
   重点的にチェックする項目：
   - 変数名・関数名が分かりやすく適切か
   - コメントが適切に書かれているか
@@ -24,31 +24,39 @@ tone_instructions: |
   - セキュリティリスク（XSS、機密情報のハードコードなど）
   - 基本的なベストプラクティスに従っているか
 
+  また、Pre-merge checksの表は必ず日本語で記述するようにしてください。
+
 # レビュー設定
 reviews:
   # レビュー機能を有効化
   enabled: true
-  
+
   # レビュープロファイル（教育的で丁寧な指摘）
   profile: "chill"
-  
+
   # 問題がある場合、修正されるまでマージをブロック
   request_changes_workflow: true
-  
+
   # 高レベルサマリーは不要
   high_level_summary: false
-  
+
   # 詩的な表現は不要
   poem: false
-  
+
+  # effort_estimationは不要
+  effort_estimation: false
+
+  # Recent review detailsを非表示
+  review_status: false
+
   # 自動レビューのトリガー
   auto_review:
     enabled: true
     drafts: false
-  
+
   # 変更されたファイルのみレビュー（デフォルト動作）
   # 単元に関係ないファイルは自動的に除外されます
-  
+
 # チャット機能設定
 chat:
   # 受講生からの質問に自動応答
