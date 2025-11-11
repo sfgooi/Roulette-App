@@ -41,6 +41,9 @@ reviews:
   # 詩的な表現は不要
   poem: false
   
+  # effort_estimationは不要
+  effort_estimation: false
+  
   # 自動レビューのトリガー
   auto_review:
     enabled: true
